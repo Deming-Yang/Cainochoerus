@@ -6,12 +6,14 @@ library(ggplot2)
 data <- read.xlsx(xlsxFile = "data/Raw measurements.xlsx", sheet = 1, skipEmptyRows = FALSE)
 
 # Find the convex hull of the points being plotted
-
+# function in dplyr
+# grouped by element
 hull_tooth <- Lang %>%
   group_by(Element) %>%
   slice(chull(BL, MD))
 
-
+# plotting grid by element for better visuals
+# shape and size by locality 
 ggplot(data, aes(BL, MD)) + 
   aes(fill = Element) + 
   geom_point(aes(shape = Locality, size = Locality)) +
