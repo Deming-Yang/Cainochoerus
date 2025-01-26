@@ -5,11 +5,14 @@ library(ggplot2)
 # data intake
 data <- read.xlsx(xlsxFile = "data/Raw measurements.xlsx", sheet = 1, skipEmptyRows = FALSE)
 
-# Find the convex hull of the points being plotted
+# remove one data point that has a missing data
+Lang <- data %>% filter(Locality == "Langebaanweg" & !is.na(MD))
+
+# Find the convex hull of the Langebaanweg points 
 # function in dplyr
 # grouped by element
 hull_tooth <- Lang %>%
-  group_by(Element) %>%
+  group_by(factor(Element, levels = c("UP2", "UM1", "UM2"))) %>%
   slice(chull(BL, MD))
 
 # plotting grid by element for better visuals
