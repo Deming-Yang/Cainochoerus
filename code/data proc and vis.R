@@ -19,8 +19,8 @@ hull_tooth <- Lang %>%
 # shape and size by locality 
 ggplot(data, aes(BL, MD)) + 
   aes(fill = Element) + 
-  geom_point(aes(shape = Locality, size = Locality)) +
   geom_polygon(data = hull_tooth, alpha = 0.5) +
+  geom_point(aes(shape = Locality, size = Locality)) +
   facet_grid(~ factor(Element, levels = c("UP2", "UM1", "UM2"))) +
   theme(legend.position = "bottom") +
   labs( x = "BL (mm)", y = "MD (mm)")
